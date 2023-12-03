@@ -1,0 +1,11 @@
+{
+    "sx": 2.0,  
+    "sy": 22.0,  
+    "gx": 19.0,  
+    "gy": 1.5, 
+    "grid_size": 0.5,  
+    "robot_radius": 0.5,  
+    "fig_dim": 24,
+    "map_xlsx": "/MapConfig/map24x24.xlsx"
+}
+
