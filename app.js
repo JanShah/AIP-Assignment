@@ -44,12 +44,13 @@ class Grid {
         this.scale = config.fig_dim
         this.cells = config.grid
         const canvas = document.getElementById('canvas')
-        const ctx = canvas.getContext('2d')
+        ctx = canvas.getContext('2d')
         canvas.width = config.grid.length * config.fig_dim
         canvas.height = config.grid[0].length * config.fig_dim
         this.canvas = canvas
         ctx.scale(this.scale, this.scale)
         this.ctx = ctx
+        this.ctx.lineWidth = 1 / this.scale
         this.agent = agent
         this.target = new Target(config)
         this.target.draw(ctx)
@@ -67,20 +68,38 @@ class Grid {
         this.createGridAtResolution();
         this.createTraversableGrid()
 
-        //testing DFS code
-        //some changes were needed, most I think could be solved easily. 
-        const dfs = new BFS(this)
-        const solution = dfs.solve([this.agent.x, this.agent.y], [this.target.x, this.target.y])
-        console.log(solution)
-        if (solution) {
-            this.ctx.fillStyle = 'green'
-            const pathToSolution = solution[1].map(cell => {
-                const position = [cell[0] / this.agent.resolution, cell[1] / this.agent.resolution]
-                this.ctx.fillRect(cell[0] - .1, cell[1] - .1, .2, .2);
-                return position
-            });
-            console.log(pathToSolution)
-        }
+        //testing code
+        setTimeout(() => {
+            const solver = new UCS(this)
+            const solution = solver.solve([this.agent.x, this.agent.y], [this.target.x, this.target.y])
+            console.log(solution)
+
+            if (solution) {
+                solution[0].forEach(group => {
+                    ctx.fillStyle = 'rgba(0,255,0,0.5)'
+
+                    this.ctx.fillRect(group.node.x - .1, group.node.y - .1, .2, .2);
+                    group.neighbours.forEach((xy, index) => {
+                        ctx.fillStyle = 'red'
+                        ctx.fillRect(xy[0] - 0.05, xy[1] - 0.05, 0.1, 0.1)
+                        ctx.beginPath()
+                        ctx.moveTo(group.node.x, group.node.y)
+                        ctx.lineTo(...xy)
+                        ctx.stroke()
+                    })
+
+                })
+
+
+                this.ctx.fillStyle = 'black'
+                const pathToSolution = solution[1].map(cell => {
+                    const position = [cell[0] / this.agent.resolution, cell[1] / this.agent.resolution]
+                    this.ctx.fillRect(cell[0] - .1, cell[1] - .1, .2, .2);
+                    return position
+                });
+                console.log(pathToSolution)
+            }
+        }, 100)
 
     }
 
@@ -93,6 +112,19 @@ class Grid {
         ]
     }
 
+    static motionModel8n() {
+        return [
+            [-1, 0, 1],
+            [-1, 1, Math.sqrt(2)],
+            [0, 1, 1],
+            [1, 1, Math.sqrt(2)],
+            [1, 0, 1],
+            [1, -1, Math.sqrt(2)],
+            [0, -1, 1],
+            [-1, -1, Math.sqrt(2)]
+        ]
+    }
+
     getGridIndex(x, y) {
         return (node.y - self.min_y) * self.xwidth + (node.x - self.min_x)
 
@@ -100,8 +132,8 @@ class Grid {
 
     validate(cell) {
         let [x, y] = cell;
-        y /= this.agent.resolution
-        x /= this.agent.resolution
+        y = Math.round(y / this.agent.resolution)
+        x = Math.round(x / this.agent.resolution)
         return this.traversableGrid[y] &&
             this.traversableGrid[y][x] &&
             this.traversableGrid[y][x] === true
@@ -204,7 +236,7 @@ class Grid {
 }
 
 async function getConfig() {
-    const configFile = window.location.origin + '/MapConfig/config9x9.json';
+    const configFile = window.location.origin + '/MapConfig/config24x24.json';
     const config = await getData(configFile);
     config.grid = await getMapFile(config.map_xlsx);
     return config;
@@ -226,7 +258,7 @@ async function getData(url) {
 
 
 window.addEventListener('DOMContentLoaded', start)
-
+let ctx
 async function start() {
     const config = await getConfig()
     const agent = new Agent(config);
