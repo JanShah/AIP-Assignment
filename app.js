@@ -69,7 +69,7 @@ class Grid {
 
         //testing DFS code
         //some changes were needed, most I think could be solved easily. 
-        const dfs = new DFS(this)
+        const dfs = new BFS(this)
         const solution = dfs.solve([this.agent.x, this.agent.y], [this.target.x, this.target.y])
         console.log(solution)
         if (solution) {

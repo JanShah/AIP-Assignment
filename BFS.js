@@ -12,7 +12,7 @@ class Node {
 }
 
 
-class DFS {
+class BFS {
     constructor(grid) {
         this.grid = grid
         this.cells = grid.traversableGrid
@@ -78,7 +78,7 @@ class DFS {
                         )
                         objStack[neighbourIndex] = neighbourNode
                         animationOrder.push(neighbour);
-                        stack.push(neighbourIndex);
+                        stack.unshift(neighbourIndex);
 
                         visitedNodes.push(neighbourIndex)
 
