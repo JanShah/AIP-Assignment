@@ -41,12 +41,6 @@ class UCS {
             const currentIndex = queue.pop()
             const animationObjects = {}
             const currentObj = objStack[currentIndex]
-
-            // #region TODO move this outside the algorithm,  
-            // This will be in the current node in animationOrder
-            // ctx.fillStyle = 'rgba(0,255,0,0.5)'
-            // ctx.fillRect(currentObj.x - 0.05, currentObj.y - 0.05, 0.1, 0.1)
-            //#endregion TODO
             animationObjects.node = currentObj
             if (currentObj.equals(end_node)) {
 
@@ -77,15 +71,7 @@ class UCS {
                 if (this.grid.validate(neighbour)) {
                     const neighbourIndex = getIndex(neighbour[0], neighbour[1])
                     if (!isVisited(neighbourIndex)) {
-                        // #region TODO move this out of algorithm.  
-                        //This will be the frontier and line to visited paths
-                        // ctx.fillStyle = 'red'
-                        // ctx.fillRect(neighbour[0] - 0.05, neighbour[1] - 0.05, 0.1, 0.1)
-                        // ctx.beginPath()
-                        // ctx.moveTo(currentObj.x, currentObj.y)
-                        // ctx.lineTo(neighbour[0], neighbour[1])
-                        // ctx.stroke()
-                        // #endregion TODO
+
                         animationObjects.neighbours.push([neighbour[0], neighbour[1]])
                         const neighbourNode = new Node(
                             neighbour[0],
@@ -95,9 +81,7 @@ class UCS {
                         )
                         objStack[neighbourIndex] = neighbourNode
                         queue.unshift(neighbourIndex);
-
                         visitedNodes.push(neighbourIndex)
-
                     }
                 }
             })

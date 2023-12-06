@@ -1,17 +1,3 @@
-class Node {
-    constructor(x, y, cost, parent) {
-        this.x = x
-        this.y = y
-        this.cost = cost
-        this.parent = parent
-    }
-
-    equals(node) {
-        return this.x === node.x && this.y === node.y
-    }
-}
-
-
 class BFS {
     constructor(grid) {
         this.grid = grid
@@ -36,13 +22,14 @@ class BFS {
         const isVisited = (cellIndex => {
             return visitedNodes.includes(cellIndex)
         })
-
         while (queue.length) {
+            const animationObjects = {}
             const currentIndex = queue.pop()
 
             const currentObj = objStack[currentIndex]
+            animationObjects.node = currentObj
             if (currentObj.equals(end_node)) {
-                
+
                 let parent = currentObj.parent
                 const path = [[currentObj.x, currentObj.y]]
                 const cost = currentObj.cost
@@ -52,19 +39,20 @@ class BFS {
                     path.unshift([obj.x, obj.y])
                     parent = objStack[parent].parent
                 }
-                return [0,path,cost]
+                return [animationOrder, path, cost]
             }
 
 
 
             const neighbours = this.motion.map(m => {
                 return [
-                    currentObj.x + m[0] * this.grid.agent.resolution,
-                    currentObj.y + m[1] * this.grid.agent.resolution,
+                    Number((currentObj.x + m[0] * this.grid.agent.resolution).toFixed(2)),
+                    Number((currentObj.y + m[1] * this.grid.agent.resolution).toFixed(2)),
                     m[2]
                 ]
 
             })
+            animationObjects.neighbours = []
             neighbours.forEach(neighbour => {
                 if (this.grid.validate(neighbour)) {
                     const neighbourIndex = getIndex(neighbour[0], neighbour[1])
@@ -76,15 +64,15 @@ class BFS {
                             currentObj.cost + neighbour[2],
                             currentIndex
                         )
+                        animationObjects.neighbours.push([neighbour[0], neighbour[1]])
                         objStack[neighbourIndex] = neighbourNode
-                        animationOrder.push(neighbour);
                         queue.unshift(neighbourIndex);
-
                         visitedNodes.push(neighbourIndex)
 
                     }
                 }
             })
+            animationOrder.push(animationObjects)
         }
 
     }

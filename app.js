@@ -1,17 +1,12 @@
 class Agent {
     constructor(config) {
         this.radius = config.robot_radius
+        this.xOffset = config.sx - Math.floor(config.sx)
+        this.yOffset = config.sy - Math.floor(config.sy)
         this.x = config.sx
         this.y = config.sy
         this.resolution = config.grid_size
         this.scale = config.fig_dim
-    }
-
-    getGridPosition(x, y) {
-        return {
-            x: x * this.resolution,
-            y: y * this.resolution
-        }
     }
 
 
@@ -70,13 +65,13 @@ class Grid {
 
         //testing code
         setTimeout(() => {
-            const solver = new UCS(this)
+            const solver = new BFS(this)
             const solution = solver.solve([this.agent.x, this.agent.y], [this.target.x, this.target.y])
             console.log(solution)
 
             if (solution) {
                 solution[0].forEach(group => {
-                    ctx.fillStyle = 'rgba(0,255,0,0.5)'
+                    ctx.fillStyle = 'rgba(0,255,0,0.4)'
 
                     this.ctx.fillRect(group.node.x - .1, group.node.y - .1, .2, .2);
                     group.neighbours.forEach((xy, index) => {
@@ -125,10 +120,6 @@ class Grid {
         ]
     }
 
-    getGridIndex(x, y) {
-        return (node.y - self.min_y) * self.xwidth + (node.x - self.min_x)
-
-    }
 
     validate(cell) {
         let [x, y] = cell;
@@ -146,7 +137,7 @@ class Grid {
             this.traversableGrid.push([]);
             row.forEach((cell, _x) => {
                 if (cell === true) return
-                const { x, y } = this.agent.getGridPosition(_x, _y);
+                const { x, y } = this.getGridPosition(_x, _y);
                 const isTraversable = this.checkTraversable(x, y);
                 this.traversableGrid[_y].push(isTraversable); // Push the result of checkTraversable
                 if (isTraversable) {
@@ -227,8 +218,8 @@ class Grid {
 
                 const { x, y } = this.getGridPosition(_x, _y)
                 this.ctx.fillRect(
-                    x,
-                    y, this.agent.resolution - .01, this.agent.resolution - .01
+                    x + 0.02,
+                    y  + 0.02, this.agent.resolution - .04, this.agent.resolution - .04
                 );
             });
         });
@@ -236,7 +227,7 @@ class Grid {
 }
 
 async function getConfig() {
-    const configFile = window.location.origin + '/MapConfig/config24x24.json';
+    const configFile = window.location.origin + '/MapConfig/config9x9.json';
     const config = await getData(configFile);
     config.grid = await getMapFile(config.map_xlsx);
     return config;
@@ -264,8 +255,6 @@ async function start() {
     const agent = new Agent(config);
     const grid = new Grid(config, agent)
     grid.draw()
-    console.log(grid.resolutionGrid)
-
 
 
 }
