@@ -25,7 +25,7 @@ class AStar {
     }
     solve(start, target) {
         const animationOrder = [];
-        this.hw = 1
+        this.hw = 2.55
         const getIndex = (x, y) => {
             return y * this.cells.length + x
         }
@@ -41,14 +41,12 @@ class AStar {
             return visitedNodes.includes(cellIndex)
         })
 
-        // const queue = [[start, [start], 0]]; //open set
         while (queue.length) {
             const currentIndex = queue.pop()
             const animationObjects = {}
             const currentObj = objStack[currentIndex]
             animationObjects.node = currentObj
 
-            // const [current, path, cost] = queue.shift()
             if (currentObj.equals(end_node)) {
                 let parent = currentObj.parent
                 const path = [[currentObj.x, currentObj.y]]
@@ -82,7 +80,7 @@ class AStar {
 
                     cell.GCost = cell.cost // distance from start to this vertex
                     cell.HCost = this.heuristic(cell, end_node) //distance from this to target
-                    cell.FCost = cell.GCost + this.hw * neighbour[2]
+                    cell.FCost = cell.GCost + this.hw * cell.HCost
                     cell.visited = true
                     animationObjects.neighbours.push([neighbour[0], neighbour[1]])
 

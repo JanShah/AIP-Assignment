@@ -80,7 +80,7 @@ class Grid {
 
         //testing code
         setTimeout(() => {
-            const solver = new DFS(this)
+            const solver = new AStar(this)
             const solution = solver.solve([this.agent.x, this.agent.y], [this.target.x, this.target.y])
             console.log(solution)
 
