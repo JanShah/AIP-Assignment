@@ -15,7 +15,7 @@ class DFS {
         const end_node = new Node(target[0], target[1])
         const startIndex = getIndex(...start)
         const objStack = {
-            [getIndex(...start)]: start_node
+            [startIndex]: start_node
         }
         const stack = [startIndex];
         const visitedNodes = [startIndex]

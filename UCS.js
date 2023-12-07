@@ -29,7 +29,7 @@ class UCS {
         const end_node = new Node(target[0], target[1])
         const startIndex = getIndex(...start)
         const objStack = {
-            [getIndex(...start)]: start_node
+            [startIndex]: start_node
         }
         const queue = [startIndex];
         const visitedNodes = [startIndex]
