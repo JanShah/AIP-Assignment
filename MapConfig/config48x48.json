@@ -1,0 +1,11 @@
+{
+    "sx": 11.0,  
+    "sy": 41.0,  
+    "gx": 35.0,  
+    "gy": 6.0, 
+    "grid_size": 0.5,  
+    "robot_radius": 1.0,  
+    "fig_dim": 15,
+    "map_xlsx": "/MapConfig/map48x48.xlsx"
+}
+
