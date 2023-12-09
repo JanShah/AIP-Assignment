@@ -2,25 +2,157 @@
 <html lang="en">
 	<head>
 		<style>
-			body {
-				overflow: hidden;
-				display: flex
+			main {
+				/* overflow: hidden; */
+				/* display: flex; */
+			}
+			#menuItems {
+				width: 200px;
+				position: absolute;
+				background: white;
+				padding: 10px 18px;
+				left: -240px;
+				transition: left 0.2s;
+			}
+			.closeMenu {
+				background: none;
+				border: none;
+			}
+
+			.closeMenu span {
+				display: block;
+				width: 20px;
+				height: 2px;
+				background: black;
+				margin-bottom: 4px;
+			}
+			#closeMenuCheck {
+				display: none;
+			}
+
+			#menuItems.active {
+				left: 0px;
+			}
+
+			.selected {
+				border: 2px solid #333;
 			}
 		</style>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
+		<title>Robot solvers</title>
 	</head>
 	<body>
-		<canvas id="canvas"></canvas>
+		<main>
+			<section id="menu">
+				<label class="closeMenu" for="closeMenuCheck">
+					<input
+						type="checkbox"
+						id="closeMenuCheck"
+					/>
+						<span></span>
+						<span></span>
+						<span></span>
+				</label>
+
+				<div id="menuItems">
+					<h2>Menu</h2>
+					<div>
+						<button id="AStarBtn">AStar</button>
+						<button id="BFSBtn">BFS</button>
+						<button id="DFSBtn">DFS</button>
+						<button id="UCSBtn">UCS</button>
+					</div>
+					<div>
+						<button id="chebyshev" class="heuristic">Chebyshev</button>
+						<button id="euclidian" class="heuristic">Euclidian</button>
+						<button id="manhattan" class="heuristic">Manhattan</button>
+					</div>
+					<div>
+						<label for="hStrength"
+							>Heuristic weighting
+							<span contenteditable="true" id="hWeight">1.0</span></label
+						>
+						<input
+							type="range"
+							min="0"
+							max="10"
+							step="0.01"
+							value="1"
+							name="hStrength"
+							id="hStrength"
+						/>
+					</div>
+					<div>
+						<button id="motion4n">4N</button>
+						<button id="motion8n">8N</button>
+					</div>
+					<section>
+						<div>
+							<label for="treeSearch">
+								<input type="checkbox" name="treeSearch" id="treeSearch" /><span
+									>Tree Search</span
+								>
+							</label>
+							<label for="quickSolve">
+								<input type="checkbox" name="quickSolve" id="quickSolve" /><span
+									>Quick solve</span
+								>
+							</label>	
+						</div>
+						<div>
+							<label for="showBigGrid">
+								<input
+									type="checkbox"
+									class="show"
+									name="showBigGrid"
+									id="showBigGrid"
+									checked
+								/><span>Show Main Grid</span>
+							</label>
+						</div>
+						<div>
+							<label for="showBarrierOverlay">
+								<input
+									type="checkbox"
+									class="show"
+									name="showBarrierOverlay"
+									id="showBarrierOverlay"
+									checked
+								/><span>Highlight Barriers</span>
+							</label>
+						</div>
+						<div>
+							<label for="showRobotScan">
+								<input
+									type="checkbox"
+									class="show"
+									name="showRobotScan"
+									id="showRobotScan"
+									checked
+								/><span>Show Robot Scan</span>
+							</label>
+						</div>
+					</section>
+				</div>
+			</section>
+
+			<canvas id="canvas"></canvas>
+		</main>
 		<script
 			lang="javascript"
 			src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"
 		></script>
-		<script src="AStar.js"></script>
-		<script src="UCS.js"></script>
-		<script src="BFS.js"></script>
-		<script src="DFS.js"></script>
+		<script src="lib/colours.js"></script>
+		<script src="lib/functions.js"></script>
+		<script src="lib/Target.js"></script>
+		<script src="lib/Listeners.js"></script>
+		<script src="lib/Grid.js"></script>
+		<script src="lib/Visualiser.js"></script>
+		<script src="lib/algorithms/AStar.js"></script>
+		<script src="lib/algorithms/UCS.js"></script>
+		<script src="lib/algorithms/BFS.js"></script>
+		<script src="lib/algorithms/DFS.js"></script>
 		<script src="app.js"></script>
 	</body>
 </html>
