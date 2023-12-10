@@ -1,0 +1,148 @@
+main {
+	font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+		"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+	text-align: center;
+}
+section#menu {
+	text-align: left;
+	z-index: 1;
+	position: relative;
+}
+.danger {
+	color: red;
+}
+.warning {
+	color: rgb(255, 119, 0);
+}
+.success {
+	color: rgb(30, 109, 40);
+	font-weight: 600;
+}
+#menuItems {
+	width: 272px;
+	position: fixed;
+	background: white;
+	padding: 10px 8px;
+	left: -300px;
+	transition: left 0.2s;
+	top: 0;
+	z-index: 0;
+	height: 85vh;
+	padding-bottom: 200px;
+	overflow-y: auto;
+}
+#menuItems p {
+	margin-bottom: 5px;
+}
+#closeMenu {
+	background: none;
+	border: none;
+	z-index: 1;
+	position: fixed;
+	left: 20px;
+	top: 10px;
+}
+
+#closeMenu span {
+	display: block;
+	width: 20px;
+	height: 3px;
+	background: black;
+	margin-bottom: 4px;
+	transition: all 0.2s;
+	border-radius: 2px;
+	box-shadow: 0 0 4px 0px white;
+}
+#closeMenuCheck {
+	display: none;
+}
+
+#menuItems.active {
+	left: 0px;
+}
+#menuItems label {
+	min-width: 109px;
+}
+
+div#menuItems section {
+	margin-bottom: 8px;
+}
+.selected {
+	border: 2px solid #333;
+}
+
+#closeMenu.active span:first-of-type {
+	transform: rotate(45deg);
+	translate: 0px 7px;
+}
+
+#closeMenu.active span:last-of-type {
+	transform: rotate(-45deg);
+	translate: 0px -7px;
+}
+
+#closeMenu.active span:nth-of-type(2) {
+	opacity: 0;
+}
+#miniImage {
+	background-color: white;
+
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	height: auto;
+}
+#menu h2 {
+	margin-top: -6px;
+	margin-left: 40px;
+}
+
+.button-group {
+	display: flex;
+	gap: 5px;
+	padding-bottom: 5px;
+}
+.button-group button {
+	flex: 1;
+}
+.editing-options div {
+	display: flex;
+	font-size: 13px;
+	align-items: center;
+}
+
+.ranges {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+.ranges input {
+	flex: 1;
+}
+
+.ranges span {
+	padding: 3px;
+	border: 1px solid;
+	border-radius: 2px;
+}
+
+.ranges span:focus {
+	outline-color: #0075ff;
+}
+
+.show-item div {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: space-between;
+}
+#animationSlider {
+	position: fixed;
+	top: 0;
+	background: white;
+	text-align: center;
+	width: 98.5vw;
+}
+
+.canvasSection {
+    margin-top: 21px;
+}

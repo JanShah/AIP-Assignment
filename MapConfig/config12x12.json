@@ -1,11 +1,11 @@
 {
-    "sx": 2.0,  
-    "sy": 7.0,  
+    "sx": 2.5,  
+    "sy": 9.0,  
     "gx": 9.0,  
-    "gy": 2.0, 
-    "grid_size": 1.0,  
+    "gy": 4.0, 
+    "grid_size": 0.25,  
     "robot_radius": 1.0,  
-    "fig_dim": 12,
+    "fig_dim": 30,
     "map_xlsx": "/MapConfig/map12x12.xlsx"
 }
 

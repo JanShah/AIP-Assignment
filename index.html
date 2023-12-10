@@ -1,128 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<style>
-			main {
-				font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-					"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-				text-align: center;
-			}
-			section#menu {
-				text-align: left;
-			}
-			#miniImage {
-				background-color: white;
-			}
-			#menuItems {
-				width: 248px;
-				position: fixed;
-				background: white;
-				padding: 10px 18px;
-				left: -300px;
-				transition: left 0.2s;
-				top: 0;
-				z-index: 0;
-				height: 85vh;
-				padding-bottom: 200px;
-				overflow-y: auto;
-			}
-			#menuItems p {
-				margin-bottom: 5px;
-			}
-			#closeMenu {
-				background: none;
-				border: none;
-				z-index: 1;
-				position: fixed;
-				left: 20px;
-				top: 10px;
-			}
-
-			#closeMenu span {
-				display: block;
-				width: 20px;
-				height: 3px;
-				background: black;
-				margin-bottom: 4px;
-				transition: all 0.2s;
-				border-radius: 2px;
-				box-shadow: 0 0 4px 0px white;
-			}
-			#closeMenuCheck {
-				display: none;
-			}
-
-			#menuItems.active {
-				left: 0px;
-			}
-			#menuItems label {
-				min-width: 102px;
-			}
-
-			div#menuItems section {
-				margin-bottom: 8px;
-			}
-			.selected {
-				border: 2px solid #333;
-			}
-
-			#closeMenu.active span:first-of-type {
-				transform: rotate(45deg);
-				translate: 0px 7px;
-			}
-
-			#closeMenu.active span:last-of-type {
-				transform: rotate(-45deg);
-				translate: 0px -7px;
-			}
-
-			#closeMenu.active span:nth-of-type(2) {
-				opacity: 0;
-			}
-			div#miniImage {
-				position: fixed;
-				top: 20px;
-				right: 20px;
-			}
-			#menu h2 {
-				margin-top: -6px;
-				margin-left: 30px;
-			}
-
-			.button-group {
-				display: flex;
-				gap: 5px;
-				padding-bottom: 5px;
-			}
-			.button-group button {
-				flex: 1;
-			}
-
-			.ranges {
-				display: flex;
-				flex-wrap: wrap;
-				justify-content: space-between;
-			}
-			.ranges input {
-				flex: 1;
-			}
-
-			.ranges span {
-				padding: 3px;
-				border: 1px solid;
-				border-radius: 2px;
-			}
-
-			.ranges span:focus {
-				outline-color: #0075ff;
-			}
-
-			.show-item div {
-				display: flex;
-				flex-direction: row-reverse;
-				justify-content: space-between;
-			}
-		</style>
+		<link rel="stylesheet" href="css/style.css">
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Robot solvers</title>
@@ -130,65 +9,78 @@
 	<body>
 		<main>
 			<section id="menu">
-				<label id="closeMenu" for="closeMenuCheck">
+				<label id="closeMenu" for="closeMenuCheck" class="active">
 					<input type="checkbox" id="closeMenuCheck" />
 					<span></span>
 					<span></span>
 					<span></span>
 				</label>
 
-				<div id="menuItems">
+				<div id="menuItems" class="active">
 					<h2>Menu</h2>
-					<p>Solver: <span id="currentSolver"></span></p>
+
+					<p>
+						Solver: <span class="danger" id="currentSolver">Not selected</span>
+					</p>
 					<section class="button-group">
 						<button id="AStarBtn">AStar</button>
 						<button id="BFSBtn">BFS</button>
 						<button id="DFSBtn">DFS</button>
 						<button id="UCSBtn">UCS</button>
 					</section>
-					<p>Heuristic: <span id="currentDistanceMetric"></span></p>
+					<p>
+						Heuristic: <span class="success" id="currentDistanceMetric"></span>
+					</p>
 					<section class="button-group">
 						<button id="chebyshev" class="heuristic">Chebyshev</button>
 						<button id="euclidian" class="heuristic">Euclidian</button>
 						<button id="manhattan" class="heuristic">Manhattan</button>
 					</section>
-					<p>Motion model: <span id="currentMotionModel"></span></p>
+					<p>
+						Motion model: <span class="success" id="currentMotionModel"></span>
+					</p>
 
 					<section class="button-group">
 						<button id="motion4n">4N</button>
 						<button id="motion8n">8N</button>
 					</section>
-					<section>
+					<section class="editing-options">
 						<div>
 							<label for="treeSearch">
-								<input type="checkbox" name="treeSearch" id="treeSearch" /><span
-									>Tree Search</span
-								>
+								<span>Tree Search</span>
+								<span class="warning">may crash browser</span>
 							</label>
+							<input type="checkbox" name="treeSearch" id="treeSearch" />
+						</div>
+						<div>
 							<label for="quickSolve">
-								<input type="checkbox" name="quickSolve" id="quickSolve" /><span
-									>Quick solve</span
-								>
+								<span>Quick solve</span>
 							</label>
+							<input type="checkbox" name="quickSolve" id="quickSolve" />
+							<label for="autoSolve">
+								<span>Auto Solve</span>
+							</label>
+							<input type="checkbox" name="autoSolve" id="autoSolve" />
 						</div>
 						<div>
 							<label for="moveTarget">
-								<input type="checkbox" name="moveTarget" id="moveTarget" /><span
-									>Move Target</span
-								>
+								<span>Move Target</span>
 							</label>
-							<label for="autoSolve">
-								<input type="checkbox" name="autoSolve" id="autoSolve" /><span
-									>Auto Solve</span
-								>
+							<input type="checkbox" name="moveTarget" id="moveTarget" />
+							<label for="moveRobot">
+								<span>Move Robot</span>
 							</label>
+							<input type="checkbox" name="moveRobot" id="moveRobot" />
 						</div>
 						<div>
 							<label for="followMouse">
-								<input type="checkbox" name="followMouse" id="followMouse" /><span
-									>Follow mouse</span
-								>
+								<span>Follow mouse</span>
 							</label>
+							<input type="checkbox" id="followMouse" />
+							<label for="editGrid">
+								<span>Edit Grid</span>
+							</label>
+							<input type="checkbox" id="editGrid" />
 						</div>
 					</section>
 
@@ -205,6 +97,45 @@
 							id="hStrength"
 						/>
 					</section>
+					<details>
+						<summary>Robot Settings</summary>
+						<section class="ranges">
+							<label for="robotRadius">Robot Radius (m)</label>
+							<span contenteditable="true" id="rRadius"></span>
+							<input
+								type="range"
+								min="0.1"
+								max="5.0"
+								step="0.1"
+								name="robotRadius"
+								id="robotRadius"
+							/>
+						</section>
+						<section class="ranges">
+							<label for="robotResolution">Robot Resolution </label>
+							<span contenteditable="true" id="rResolution"></span>
+							<input
+								type="range"
+								min="0.05"
+								max="1.0"
+								step="0.05"
+								name="robotResolution"
+								id="robotResolution"
+							/>
+						</section>
+						<section class="ranges">
+							<label for="minTargetDistance">Target Distance</label>
+							<span contenteditable="true" id="rtDistance"></span>
+							<input
+								type="range"
+								min="0.05"
+								max="3.0"
+								step="0.05"
+								name="minTargetDistance"
+								id="minTargetDistance"
+							/>
+						</section>
+					</details>
 					<details>
 						<summary>Scaling</summary>
 						<section class="ranges">
@@ -257,33 +188,7 @@
 							/>
 						</section>
 					</details>
-					<details>
-						<summary>Robot Settings</summary>
-						<section class="ranges">
-							<label for="robotRadius">Robot Radius </label>
-							<span contenteditable="true" id="rRadius"></span>
-							<input
-								type="range"
-								min="0.1"
-								max="5.0"
-								step="0.1"
-								name="robotRadius"
-								id="robotRadius"
-							/>
-						</section>
-						<section class="ranges">
-							<label for="robotResolution">Robot Resolution </label>
-							<span contenteditable="true" id="rResolution"></span>
-							<input
-								type="range"
-								min="0.05"
-								max="1.0"
-								step="0.05"
-								name="robotResolution"
-								id="robotResolution"
-							/>
-						</section>
-					</details>
+
 					<details class="show-item">
 						<summary>Visuals</summary>
 						<div>
@@ -306,7 +211,7 @@
 								id="showBarrierOverlay"
 							/>
 							<label for="showBarrierOverlay">
-								<span>Highlight Barriers</span>
+								<span>Highlight Boundaries</span>
 							</label>
 						</div>
 						<div>
@@ -380,14 +285,40 @@
 								<span>Show Final Path</span>
 							</label>
 						</div>
+						<div>
+							<input
+								type="checkbox"
+								class="show"
+								name="showSolutionNodes"
+								id="showSolutionNodes"
+								checked
+							/>
+							<label for="showSolutionNodes">
+								<span>Show Path Nodes</span>
+							</label>
+						</div>
 					</details>
+					<details>
+						<summary>Colours</summary>
+						<section id="modelColours">
+						</section>
+					</details>
+					<p>Load default</p>
+					<section class="button-group">
+						<button data-id="9" class="defaults">9x9</button>
+						<button data-id="12" class="defaults">12x12</button>
+						<button data-id="24" class="defaults">24x24</button>
+						<button data-id="48" class="defaults">48x48</button>
+					</section>
 				</div>
 			</section>
+			<div class="canvasSection">
+				<div id="animationSlider"></div>
+				<canvas id="canvas"></canvas>
+			</div>
 
-			<canvas id="canvas"></canvas>
 			<div id="miniImage"></div>
-			<section id="solutionInformation">
-			</section>
+			<section id="solutionInformation"></section>
 		</main>
 		<script
 			lang="javascript"
@@ -396,6 +327,7 @@
 		<script src="lib/SolutionInformation.js"></script>
 		<script src="lib/colours.js"></script>
 		<script src="lib/functions.js"></script>
+		<script src="lib/Agent.js"></script>
 		<script src="lib/Target.js"></script>
 		<script src="lib/Node.js"></script>
 		<script src="lib/Listeners.js"></script>

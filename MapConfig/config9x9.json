@@ -5,7 +5,7 @@
     "gy": 6.5, 
     "grid_size": 0.25,  
     "robot_radius": 0.5,  
-    "fig_dim": 90,
+    "fig_dim": 40,
     "map_xlsx": "/MapConfig/map9x9.xlsx"
 }
 
