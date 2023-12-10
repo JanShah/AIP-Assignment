@@ -22,6 +22,9 @@
 				transition: left 0.2s;
 				top: 0;
 				z-index: 0;
+				height: 85vh;
+				padding-bottom: 200px;
+				overflow-y: auto;
 			}
 			#menuItems p {
 				margin-bottom: 5px;
@@ -136,22 +139,20 @@
 
 				<div id="menuItems">
 					<h2>Menu</h2>
-
+					<p>Solver: <span id="currentSolver"></span></p>
 					<section class="button-group">
 						<button id="AStarBtn">AStar</button>
 						<button id="BFSBtn">BFS</button>
 						<button id="DFSBtn">DFS</button>
 						<button id="UCSBtn">UCS</button>
 					</section>
-					<p>
-						Current distance metric <span id="currentDistanceMetric"></span>
-					</p>
+					<p>Heuristic: <span id="currentDistanceMetric"></span></p>
 					<section class="button-group">
 						<button id="chebyshev" class="heuristic">Chebyshev</button>
 						<button id="euclidian" class="heuristic">Euclidian</button>
 						<button id="manhattan" class="heuristic">Manhattan</button>
 					</section>
-					<p>Current motion model <span id="currentMotionModel"></span></p>
+					<p>Motion model: <span id="currentMotionModel"></span></p>
 
 					<section class="button-group">
 						<button id="motion4n">4N</button>
@@ -170,93 +171,121 @@
 								>
 							</label>
 						</div>
+						<div>
+							<label for="moveTarget">
+								<input type="checkbox" name="moveTarget" id="moveTarget" /><span
+									>Move Target</span
+								>
+							</label>
+							<label for="autoSolve">
+								<input type="checkbox" name="autoSolve" id="autoSolve" /><span
+									>Auto Solve</span
+								>
+							</label>
+						</div>
+						<div>
+							<label for="followMouse">
+								<input type="checkbox" name="followMouse" id="followMouse" /><span
+									>Follow mouse</span
+								>
+							</label>
+						</div>
 					</section>
+
 					<section class="ranges">
 						<label for="hStrength">Heuristic weighting </label
 						><span contenteditable="true" id="hWeight">1.0</span>
 						<input
 							type="range"
 							min="0"
-							max="10"
+							max="100"
 							step="0.01"
 							value="1"
 							name="hStrength"
 							id="hStrength"
 						/>
 					</section>
-					<section class="ranges">
-						<label for="visualScale">Visual Scale </label>
-						<span contenteditable="true" id="vScale"></span>
-						<input
-							type="range"
-							min="5"
-							max="100"
-							step="1"
-							name="visualScale"
-							id="visualScale"
-						/>
-					</section>
-					<section class="ranges">
-						<label for="robotRadius">Robot Radius </label>
-						<span contenteditable="true" id="rRadius"></span>
-						<input
-							type="range"
-							min="0.1"
-							max="5.0"
-							step="0.1"
-							name="robotRadius"
-							id="robotRadius"
-						/>
-					</section>
-					<section class="ranges">
-						<label for="robotResolution">Robot Resolution </label>
-						<span contenteditable="true" id="rResolution"></span>
-						<input
-							type="range"
-							min="0.05"
-							max="1.0"
-							step="0.05"
-							name="robotResolution"
-							id="robotResolution"
-						/>
-					</section>
-					<section class="ranges">
-						<label for="scanDotSize">Scan Dot Size </label>
-						<span contenteditable="true" id="sdSize"></span>
-						<input
-							type="range"
-							min="0.05"
-							max="0.5"
-							step="0.05"
-							name="scanDotSize"
-							id="scanDotSize"
-						/>
-					</section>
-					<section class="ranges">
-						<label for="neighbourDotSize">Neighbour Dot Size </label>
-						<span contenteditable="true" id="ndSize"></span>
-						<input
-							type="range"
-							min="0.05"
-							max="0.5"
-							step="0.05"
-							name="neighbourDotSize"
-							id="neighbourDotSize"
-						/>
-					</section>
-					<section class="ranges">
-						<label for="visitedDotSize">Visited Dot Size </label>
-						<span contenteditable="true" id="vdSize"></span>
-						<input
-							type="range"
-							min="0.05"
-							max="0.5"
-							step="0.05"
-							name="visitedDotSize"
-							id="visitedDotSize"
-						/>
-					</section>
-					<section class="show-item">
+					<details>
+						<summary>Scaling</summary>
+						<section class="ranges">
+							<label for="visualScale">Visual Scale </label>
+							<span contenteditable="true" id="vScale"></span>
+							<input
+								type="range"
+								min="5"
+								max="100"
+								step="1"
+								name="visualScale"
+								id="visualScale"
+							/>
+						</section>
+
+						<section class="ranges">
+							<label for="scanDotSize">Scan Dot Size </label>
+							<span contenteditable="true" id="sdSize"></span>
+							<input
+								type="range"
+								min="0.05"
+								max="0.5"
+								step="0.05"
+								name="scanDotSize"
+								id="scanDotSize"
+							/>
+						</section>
+						<section class="ranges">
+							<label for="neighbourDotSize">Neighbour Dot Size </label>
+							<span contenteditable="true" id="ndSize"></span>
+							<input
+								type="range"
+								min="0.05"
+								max="0.5"
+								step="0.05"
+								name="neighbourDotSize"
+								id="neighbourDotSize"
+							/>
+						</section>
+						<section class="ranges">
+							<label for="visitedDotSize">Visited Dot Size </label>
+							<span contenteditable="true" id="vdSize"></span>
+							<input
+								type="range"
+								min="0.05"
+								max="0.5"
+								step="0.05"
+								name="visitedDotSize"
+								id="visitedDotSize"
+							/>
+						</section>
+					</details>
+					<details>
+						<summary>Robot Settings</summary>
+						<section class="ranges">
+							<label for="robotRadius">Robot Radius </label>
+							<span contenteditable="true" id="rRadius"></span>
+							<input
+								type="range"
+								min="0.1"
+								max="5.0"
+								step="0.1"
+								name="robotRadius"
+								id="robotRadius"
+							/>
+						</section>
+						<section class="ranges">
+							<label for="robotResolution">Robot Resolution </label>
+							<span contenteditable="true" id="rResolution"></span>
+							<input
+								type="range"
+								min="0.05"
+								max="1.0"
+								step="0.05"
+								name="robotResolution"
+								id="robotResolution"
+							/>
+						</section>
+					</details>
+					<details class="show-item">
+						<summary>Visuals</summary>
 						<div>
 							<input
 								type="checkbox"
@@ -351,17 +380,20 @@
 								<span>Show Final Path</span>
 							</label>
 						</div>
-					</section>
+					</details>
 				</div>
 			</section>
 
 			<canvas id="canvas"></canvas>
 			<div id="miniImage"></div>
+			<section id="solutionInformation">
+			</section>
 		</main>
 		<script
 			lang="javascript"
 			src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"
 		></script>
+		<script src="lib/SolutionInformation.js"></script>
 		<script src="lib/colours.js"></script>
 		<script src="lib/functions.js"></script>
 		<script src="lib/Target.js"></script>
