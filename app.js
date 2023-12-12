@@ -7,5 +7,7 @@ async function start() {
     const config = await getConfig(size);
     const agent = new Agent(config);
     const target = new Target(config);
-    new Grid(config, agent, target);
+    const grid = new Grid(config, agent, target);
+    const testRunner = new TestRunner(grid);
+    // testRunner.testRun()
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/style.css" />
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Robot solvers</title>
@@ -39,10 +39,39 @@
 					<p>
 						Motion model: <span class="success" id="currentMotionModel"></span>
 					</p>
-
 					<section class="button-group">
-						<button id="motion4n">4N</button>
-						<button id="motion8n">8N</button>
+						<div class="join-buttons">
+							<button id="motion4n">4N</button>
+							<button id="edit4n">Edit</button>
+						</div>
+						<div class="join-buttons">
+							<button id="motion8n">8N</button>
+							<button id="edit8n">Edit</button>
+						</div>
+					</section>
+					<section id="editMotionModel">
+						<table>
+							<thead><tr>
+								<td>x</td>
+								<td>y</td>
+								<td>cost</td>
+							</tr></thead>
+							<tr>
+								<td><input type="number" value="1" /></td>
+								<td><input type="number" value="0" /></td>
+								<td><input type="number" value="1"/></td>
+							</tr>
+							<tr>
+								<td><input type="number" /></td>
+								<td><input type="number" /></td>
+								<td><input type="number" /></td>
+							</tr>
+							<tr>
+								<td><input type="number" /></td>
+								<td><input type="number" /></td>
+								<td><input type="number" /></td>
+							</tr>
+						</table>
 					</section>
 					<section class="editing-options">
 						<div>
@@ -300,8 +329,7 @@
 					</details>
 					<details>
 						<summary>Colours</summary>
-						<section id="modelColours">
-						</section>
+						<section id="modelColours"></section>
 					</details>
 					<p>Load default</p>
 					<section class="button-group">
@@ -325,6 +353,7 @@
 			src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"
 		></script>
 		<script src="lib/SolutionInformation.js"></script>
+		<script src="lib/TestRunner.js"></script>
 		<script src="lib/colours.js"></script>
 		<script src="lib/functions.js"></script>
 		<script src="lib/Agent.js"></script>

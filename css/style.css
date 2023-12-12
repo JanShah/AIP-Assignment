@@ -105,6 +105,57 @@ div#menuItems section {
 .button-group button {
 	flex: 1;
 }
+
+#editMotionModel {
+	text-align: center;
+	height: 0;
+	overflow: hidden;
+
+}
+#editMotionModel td input {
+    width: 55px;
+}
+
+.modelCloseBtn {
+
+    font-weight: 800;
+    width: 50px;
+}
+
+.join-buttons {
+	display: flex;
+	width: 50%;
+}
+.join-buttons button:last-of-type:hover,
+.join-buttons button:first-of-type:hover {
+	border-color: #4e4e4e;
+	background: #e5e5e5;
+}
+
+.join-buttons button:first-of-type {
+	border: 0;
+	border-left: 1px solid;
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+	border-bottom-right-radius: 0;
+	border-top-right-radius: 0;
+	border-bottom-left-radius: 3px;
+	border-top-left-radius: 3px;
+	border-color: #767676;
+	flex: 2;
+}
+.join-buttons button:last-of-type {
+	border: 0;
+	border-right: 1px solid;
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+	border-bottom-left-radius: 0;
+	border-top-left-radius: 0;
+	border-bottom-right-radius: 3px;
+	border-top-right-radius: 3px;
+	border-color: #767676;
+}
+
 .editing-options div {
 	display: flex;
 	font-size: 13px;
@@ -144,5 +195,5 @@ div#menuItems section {
 }
 
 .canvasSection {
-    margin-top: 21px;
+	margin-top: 21px;
 }
