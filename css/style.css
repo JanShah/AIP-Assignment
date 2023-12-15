@@ -197,3 +197,48 @@ div#menuItems section {
 .canvasSection {
 	margin-top: 21px;
 }
+
+section#graphContainer {
+    position: absolute;
+	opacity: 0;
+    top: -200px;
+    left: 20px;
+    background: whitesmoke;
+    width: calc(100vw - 40px);
+    height: 0px;
+	display: flex;
+	z-index: 0;
+	gap: 10px;
+	transition: all 0.2s;
+}
+
+section#graphContainer.active {
+	opacity: 1;
+    top: 20px;
+    height: calc(100vh - 40px);
+	display: flex;
+	z-index: 1;
+	gap: 10px;
+
+}
+
+.graphMenu {
+	width:200px;
+	background-color: #949494;
+    flex: 1;
+	margin: 10px;
+	border-radius: 10px;
+}
+
+.graphMenu .header button {
+	background:transparent;
+	border:none;
+	color: white;
+	padding:10px;
+}
+
+
+#graphSection {
+	flex:4;
+	margin:10px;
+}

@@ -8,6 +8,7 @@
 	</head>
 	<body>
 		<main>
+			<div id="noOfTests"></div>
 			<section id="menu">
 				<label id="closeMenu" for="closeMenuCheck" class="active">
 					<input type="checkbox" id="closeMenuCheck" />
@@ -19,9 +20,7 @@
 				<div id="menuItems" class="active">
 					<h2>Menu</h2>
 
-					<p>
-						Solver: <span class="danger" id="currentSolver">Not selected</span>
-					</p>
+					<p>Solver: <span class="success" id="currentSolver">AStar</span></p>
 					<section class="button-group">
 						<button id="AStarBtn">AStar</button>
 						<button id="BFSBtn">BFS</button>
@@ -49,9 +48,7 @@
 							<button id="edit8n">Edit</button>
 						</div>
 					</section>
-					<section id="editMotionModel">
-
-					</section>
+					<section id="editMotionModel"></section>
 					<section class="editing-options">
 						<div>
 							<label for="treeSearch">
@@ -85,6 +82,12 @@
 								<span>Follow mouse</span>
 							</label>
 							<input type="checkbox" id="followMouse" />
+							<label for="runToTarget">
+								<span>Travelling Agent</span>
+							</label>
+							<input type="checkbox" id="runToTarget" />
+						</div>
+						<div>
 							<label for="editGrid">
 								<span>Edit Grid</span>
 							</label>
@@ -126,7 +129,7 @@
 								type="range"
 								min="0.05"
 								max="1.0"
-								step="0.05"
+								step="0.01"
 								name="robotResolution"
 								id="robotResolution"
 							/>
@@ -317,6 +320,14 @@
 						<button data-id="24" class="defaults">24x24</button>
 						<button data-id="48" class="defaults">48x48</button>
 					</section>
+					<section class="button-group">
+						<button id="runTests" onclick="testRunner.testRun()">
+							Run Tests
+						</button>
+						<button id="showGraph" id="openGraph">
+							Show Graph
+						</button>
+					</section>
 				</div>
 			</section>
 			<div class="canvasSection">
@@ -327,6 +338,14 @@
 			<div id="miniImage"></div>
 			<section id="solutionInformation"></section>
 		</main>
+		<section id="graphContainer">
+			<aside class="graphMenu">
+				<div class="header"><button id="closeGraph">X</button></div>
+				<div id="graphDataButtons" class="main"></div>
+			</aside>
+			<section id="graphSection"></section>
+		</section>
+
 		<script
 			lang="javascript"
 			src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"
@@ -348,5 +367,39 @@
 		<script src="lib/algorithms/BFS.js"></script>
 		<script src="lib/algorithms/DFS.js"></script>
 		<script src="app.js"></script>
+
+		<script>
+			// const canvass = document.createElement("canvas");
+			// canvass.id = "graph";
+			// const dt = JSON.parse(localStorage.getItem("performance"));
+			// const dtc = dt
+			// .filter(obj=>obj['heuristic']=='chebyshev')
+			// .map((obj) => ({ y: obj["memory"], x: obj["resolution"] }));
+			// // const y = dt.map(obj=>obj['cost'])
+			// console.log(dtc);
+			// const config = {
+			// 	type: "scatter",
+			// 	data: {
+			// 		datasets: [
+			// 			{
+			// 				label: "Scatter Dataset",
+			// 				data: dtc,
+			// 				backgroundColor: "rgb(255, 99, 132)",
+			// 			},
+			// 		],
+			// 	},
+			// 	options: {
+			// 		scales: {
+			// 			x: {
+			// 				type: "linear",
+			// 				position: "bottom",
+			// 			},
+			// 		},
+			// 	},
+			// };
+			// const ctxx = canvass.getContext("2d");
+			// const chart = new Chart(ctxx, config);
+			// document.body.append(canvass);
+		</script>
 	</body>
 </html>

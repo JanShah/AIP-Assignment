@@ -4,8 +4,8 @@
     "gx": 35.0,  
     "gy": 6.0, 
     "grid_size": 0.5,  
-    "robot_radius": 1.0,  
-    "fig_dim": 15,
+    "robot_radius": 1.5,  
+    "fig_dim": 13,
     "map_xlsx": "/MapConfig/map48x48.xlsx"
 }
 

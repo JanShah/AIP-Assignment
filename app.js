@@ -1,4 +1,5 @@
 window.addEventListener('DOMContentLoaded', start);
+let testRunner;
 async function start() {
     let size = 9;
     if(window.location.hash) {
@@ -8,6 +9,6 @@ async function start() {
     const agent = new Agent(config);
     const target = new Target(config);
     const grid = new Grid(config, agent, target);
-    const testRunner = new TestRunner(grid);
-    // testRunner.testRun()
+    testRunner = new TestRunner(grid);
 }
+
