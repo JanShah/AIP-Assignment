@@ -1,8 +1,17 @@
 main {
+	user-select: none;
 	font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
 		"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 	text-align: center;
 }
+
+.tooltip {
+	position: absolute;
+	z-index: 2;
+	background: whitesmoke;
+	padding: 0 20px;
+}
+
 section#menu {
 	text-align: left;
 	z-index: 1;
@@ -34,6 +43,18 @@ section#menu {
 #menuItems p {
 	margin-bottom: 5px;
 }
+
+#menuItems span.info {
+	border: 1px dashed #7f7f7f;
+	border-radius: 50%;
+	width: 14px;
+	height: 14px;
+	display: inline-block;
+	margin-right: 10px;
+	background: url(../images/i.png) -0.4px 0px no-repeat;
+	box-sizing: border-box;
+}
+
 #closeMenu {
 	background: none;
 	border: none;
@@ -110,16 +131,14 @@ div#menuItems section {
 	text-align: center;
 	height: 0;
 	overflow: hidden;
-
 }
 #editMotionModel td input {
-    width: 55px;
+	width: 55px;
 }
 
 .modelCloseBtn {
-
-    font-weight: 800;
-    width: 50px;
+	font-weight: 800;
+	width: 50px;
 }
 
 .join-buttons {
@@ -199,13 +218,13 @@ div#menuItems section {
 }
 
 section#graphContainer {
-    position: absolute;
+	position: absolute;
 	opacity: 0;
-    top: -200px;
-    left: 20px;
-    background: whitesmoke;
-    width: calc(100vw - 40px);
-    height: 0px;
+	top: -200px;
+	left: 20px;
+	background: whitesmoke;
+	width: calc(100vw - 40px);
+	height: 0px;
 	display: flex;
 	z-index: 0;
 	gap: 10px;
@@ -214,31 +233,48 @@ section#graphContainer {
 
 section#graphContainer.active {
 	opacity: 1;
-    top: 20px;
-    height: calc(100vh - 40px);
+	top: 20px;
+	height: calc(100vh - 40px);
 	display: flex;
 	z-index: 1;
 	gap: 10px;
-
 }
 
 .graphMenu {
-	width:200px;
+	min-width: 250px;
 	background-color: #949494;
-    flex: 1;
+	flex: 1;
 	margin: 10px;
 	border-radius: 10px;
 }
 
 .graphMenu .header button {
-	background:transparent;
-	border:none;
+	background: transparent;
+	border: none;
 	color: white;
-	padding:10px;
+	padding: 10px;
 }
 
-
 #graphSection {
-	flex:4;
-	margin:10px;
+	flex: 4;
+	margin: 10px;
+}
+#graphDataButtons {
+    padding-left: 5px;
+}
+
+#graphDataButtons .btn-group {
+	display: inline-flex;
+	width: 120px;
+	margin-bottom: 20px;
+	flex-wrap: wrap;
+}
+
+#graphDataButtons .btn-group button {
+	display: block;
+	width: 100%;
+	font-size: 11px;
+}
+#graphDataButtons .btn-group button.active {
+	color: red;
 }

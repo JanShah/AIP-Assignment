@@ -20,7 +20,10 @@
 				<div id="menuItems" class="active">
 					<h2>Menu</h2>
 
-					<p>Solver: <span class="success" id="currentSolver">AStar</span></p>
+					<p>
+						<span class="info" data-topic="solver"></span>Solver:
+						<span class="success" id="currentSolver">AStar</span>
+					</p>
 					<section class="button-group">
 						<button id="AStarBtn">AStar</button>
 						<button id="BFSBtn">BFS</button>
@@ -28,7 +31,8 @@
 						<button id="UCSBtn">UCS</button>
 					</section>
 					<p>
-						Heuristic: <span class="success" id="currentDistanceMetric"></span>
+						<span class="info" data-topic="heuristic"></span>Heuristic:
+						<span class="success" id="currentDistanceMetric"></span>
 					</p>
 					<section class="button-group">
 						<button id="chebyshev" class="heuristic">Chebyshev</button>
@@ -36,7 +40,8 @@
 						<button id="manhattan" class="heuristic">Manhattan</button>
 					</section>
 					<p>
-						Motion model: <span class="success" id="currentMotionModel"></span>
+						<span class="info" data-topic="motion"></span>Motion model:
+						<span class="success" id="currentMotionModel"></span>
 					</p>
 					<section class="button-group">
 						<div class="join-buttons">
@@ -50,6 +55,7 @@
 					</section>
 					<section id="editMotionModel"></section>
 					<section class="editing-options">
+						<p><span class="info" data-topic="options"></span>Options</p>
 						<div>
 							<label for="treeSearch">
 								<span>Tree Search</span>
@@ -94,14 +100,13 @@
 							<input type="checkbox" id="editGrid" />
 						</div>
 					</section>
-
 					<section class="ranges">
 						<label for="hStrength">Heuristic weighting </label
 						><span contenteditable="true" id="hWeight">1.0</span>
 						<input
 							type="range"
 							min="0"
-							max="100"
+							max="5"
 							step="0.01"
 							value="1"
 							name="hStrength"
@@ -109,7 +114,9 @@
 						/>
 					</section>
 					<details>
-						<summary>Robot Settings</summary>
+						<summary>
+							<span class="info" data-topic="robot"></span>Robot Settings
+						</summary>
 						<section class="ranges">
 							<label for="robotRadius">Robot Radius (m)</label>
 							<span contenteditable="true" id="rRadius"></span>
@@ -148,7 +155,9 @@
 						</section>
 					</details>
 					<details>
-						<summary>Scaling</summary>
+						<summary>
+							<span class="info" data-topic="scale"></span>Scaling
+						</summary>
 						<section class="ranges">
 							<label for="visualScale">Visual Scale </label>
 							<span contenteditable="true" id="vScale"></span>
@@ -201,7 +210,21 @@
 					</details>
 
 					<details class="show-item">
-						<summary>Visuals</summary>
+						<summary>
+							<span class="info" data-topic="visuals"></span>Visuals
+						</summary>
+						<div>
+							<input
+								type="checkbox"
+								class="show"
+								name="showTooltips"
+								id="showTooltips"
+								checked
+							/>
+							<label for="showTooltips">
+								<span>Show Tooltips</span>
+							</label>
+						</div>
 						<div>
 							<input
 								type="checkbox"
@@ -310,23 +333,37 @@
 						</div>
 					</details>
 					<details>
-						<summary>Colours</summary>
+						<summary>
+							<span class="info" data-topic="colours"></span>Colours
+						</summary>
 						<section id="modelColours"></section>
 					</details>
-					<p>Load default</p>
+					<p><span class="info" data-topic="defaults"></span>Load default</p>
 					<section class="button-group">
 						<button data-id="9" class="defaults">9x9</button>
 						<button data-id="12" class="defaults">12x12</button>
 						<button data-id="24" class="defaults">24x24</button>
 						<button data-id="48" class="defaults">48x48</button>
 					</section>
+					<p>
+						<span class="info" data-topic="customisation"></span>Custom Grid
+					</p>
+					<section class="ranges">
+						<label for="gridRowsCols">Number of Rows/Cols</label>
+						<input
+							type="range"
+							min="6"
+							max="100"
+							name="gridRowsCols"
+							id="gridRowsCols"
+						/>
+					</section>
+					<p><span class="info" data-topic="tests"></span>Tests</p>
 					<section class="button-group">
 						<button id="runTests" onclick="testRunner.testRun()">
 							Run Tests
 						</button>
-						<button id="showGraph" id="openGraph">
-							Show Graph
-						</button>
+						<button id="showGraph" id="openGraph">Show Graph</button>
 					</section>
 				</div>
 			</section>
@@ -346,11 +383,19 @@
 			<section id="graphSection"></section>
 		</section>
 
+		<script src="https://hammerjs.github.io/dist/hammer.min.js"></script>
 		<script
 			lang="javascript"
 			src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"
 		></script>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js"
+			integrity="sha512-wUYbRPLV5zs6IqvWd88HIqZU/b8TBx+I8LEioQ/UC0t5EMCLApqhIAnUg7EsAzdbhhdgW07TqYDdH3QEXRcPOQ=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+		<script src="lib/data/info.js"></script>
 		<script src="lib/Grapher.js"></script>
 		<script src="lib/SolutionInformation.js"></script>
 		<script src="lib/TestRunner.js"></script>
@@ -401,5 +446,19 @@
 			// const chart = new Chart(ctxx, config);
 			// document.body.append(canvass);
 		</script>
+
+		<div
+			class="tooltip"
+			style="
+				top: -60px;
+				left: -200px;
+	
+			"
+		>
+			<h2></h2>
+			<section>
+				<p>This is the tooltip content for this info block</p>
+			</section>
+		</div>
 	</body>
 </html>
