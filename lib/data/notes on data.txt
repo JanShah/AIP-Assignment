@@ -1,0 +1,10 @@
+time: in ms
+memory: in bytes (estimated) 
+cost: the numbers of steps, inversely proportional to resolution
+length: in metres
+gridsize: the total number of 1m grid squares
+resolution: in metres
+points: total number of spots scanned, inversely proportional to resolution
+solver: one of the four algorithms
+heuristic: only seen in astar
+weight: the multiplier given to the heuristic calculation
