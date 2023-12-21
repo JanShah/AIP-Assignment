@@ -19,7 +19,6 @@
 
 				<div id="menuItems" class="active">
 					<h2>Menu</h2>
-
 					<p>
 						<span class="info" data-topic="solver"></span>Solver:
 						<span class="success" id="currentSolver">AStar</span>
@@ -170,7 +169,6 @@
 								id="visualScale"
 							/>
 						</section>
-
 						<section class="ranges">
 							<label for="scanDotSize">Scan Dot Size </label>
 							<span contenteditable="true" id="sdSize"></span>
@@ -208,7 +206,6 @@
 							/>
 						</section>
 					</details>
-
 					<details class="show-item">
 						<summary>
 							<span class="info" data-topic="visuals"></span>Visuals
@@ -371,7 +368,6 @@
 				<div id="animationSlider"></div>
 				<canvas id="canvas"></canvas>
 			</div>
-
 			<div id="miniImage"></div>
 			<section id="solutionInformation"></section>
 		</main>
@@ -382,7 +378,12 @@
 			</aside>
 			<section id="graphSection"></section>
 		</section>
-
+		<div class="tooltip" style="top: -60px; left: -200px">
+			<h2></h2>
+			<section>
+				<p></p>
+			</section>
+		</div>
 		<script src="https://hammerjs.github.io/dist/hammer.min.js"></script>
 		<script
 			lang="javascript"
@@ -412,53 +413,5 @@
 		<script src="lib/algorithms/BFS.js"></script>
 		<script src="lib/algorithms/DFS.js"></script>
 		<script src="app.js"></script>
-
-		<script>
-			// const canvass = document.createElement("canvas");
-			// canvass.id = "graph";
-			// const dt = JSON.parse(localStorage.getItem("performance"));
-			// const dtc = dt
-			// .filter(obj=>obj['heuristic']=='chebyshev')
-			// .map((obj) => ({ y: obj["memory"], x: obj["resolution"] }));
-			// // const y = dt.map(obj=>obj['cost'])
-			// console.log(dtc);
-			// const config = {
-			// 	type: "scatter",
-			// 	data: {
-			// 		datasets: [
-			// 			{
-			// 				label: "Scatter Dataset",
-			// 				data: dtc,
-			// 				backgroundColor: "rgb(255, 99, 132)",
-			// 			},
-			// 		],
-			// 	},
-			// 	options: {
-			// 		scales: {
-			// 			x: {
-			// 				type: "linear",
-			// 				position: "bottom",
-			// 			},
-			// 		},
-			// 	},
-			// };
-			// const ctxx = canvass.getContext("2d");
-			// const chart = new Chart(ctxx, config);
-			// document.body.append(canvass);
-		</script>
-
-		<div
-			class="tooltip"
-			style="
-				top: -60px;
-				left: -200px;
-	
-			"
-		>
-			<h2></h2>
-			<section>
-				<p>This is the tooltip content for this info block</p>
-			</section>
-		</div>
 	</body>
 </html>
