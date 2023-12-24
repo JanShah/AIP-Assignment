@@ -3,7 +3,6 @@
 ![Main program screen](./images/main-screen.jpg)
 
 To run the program, open it in Visual Studio Code and run live server.  Alternatively, open index.html in your favourite browser.
-*note: The test will not save data or show graph data if you do not use a web server.*
 
 ## Solver
 
