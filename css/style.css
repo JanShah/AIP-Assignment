@@ -243,7 +243,6 @@ section#graphContainer.active {
 .graphMenu {
 	min-width: 250px;
 	background-color: #949494;
-	flex: 1;
 	margin: 10px;
 	border-radius: 10px;
 }
