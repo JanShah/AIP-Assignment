@@ -1,418 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<link rel="stylesheet" href="css/style.css" />
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Robot solvers</title>
-	</head>
-	<body>
-		<main>
-			<div id="noOfTests"></div>
-			<section id="menu">
-				<label id="closeMenu" for="closeMenuCheck" class="active">
-					<input type="checkbox" id="closeMenuCheck" />
-					<span></span>
-					<span></span>
-					<span></span>
-				</label>
 
-				<div id="menuItems" class="active">
-					<h2>Menu</h2>
-					<p>
-						<span class="info" data-topic="solver"></span>Solver:
-						<span class="success" id="currentSolver">AStar</span>
-					</p>
-					<section class="button-group">
-						<button id="AStarBtn">AStar</button>
-						<button id="BFSBtn">BFS</button>
-						<button id="DFSBtn">DFS</button>
-						<button id="UCSBtn">UCS</button>
-					</section>
-					<p>
-						<span class="info" data-topic="heuristic"></span>Heuristic:
-						<span class="success" id="currentDistanceMetric"></span>
-					</p>
-					<section class="button-group">
-						<button id="chebyshev" class="heuristic">Chebyshev</button>
-						<button id="euclidian" class="heuristic">Euclidian</button>
-						<button id="manhattan" class="heuristic">Manhattan</button>
-					</section>
-					<p>
-						<span class="info" data-topic="motion"></span>Motion model:
-						<span class="success" id="currentMotionModel"></span>
-					</p>
-					<section class="button-group">
-						<div class="join-buttons">
-							<button id="motion4n">4N</button>
-							<button id="edit4n">Edit</button>
-						</div>
-						<div class="join-buttons">
-							<button id="motion8n">8N</button>
-							<button id="edit8n">Edit</button>
-						</div>
-					</section>
-					<section id="editMotionModel"></section>
-					<section class="editing-options">
-						<p><span class="info" data-topic="options"></span>Options</p>
-						<div>
-							<label for="treeSearch">
-								<span>Tree Search</span>
-								<span class="warning">may crash browser</span>
-							</label>
-							<input type="checkbox" name="treeSearch" id="treeSearch" />
-						</div>
-						<div>
-							<label for="quickSolve">
-								<span>Quick solve</span>
-							</label>
-							<input type="checkbox" name="quickSolve" id="quickSolve" />
-							<label for="autoSolve">
-								<span>Auto Solve</span>
-							</label>
-							<input type="checkbox" name="autoSolve" id="autoSolve" />
-						</div>
-						<div>
-							<label for="moveTarget">
-								<span>Move Target</span>
-							</label>
-							<input type="checkbox" name="moveTarget" id="moveTarget" />
-							<label for="moveRobot">
-								<span>Move Robot</span>
-							</label>
-							<input type="checkbox" name="moveRobot" id="moveRobot" />
-						</div>
-						<div>
-							<label for="followMouse">
-								<span>Follow mouse</span>
-							</label>
-							<input type="checkbox" id="followMouse" />
-							<label for="runToTarget">
-								<span>Travelling Robot</span>
-							</label>
-							<input type="checkbox" id="runToTarget" />
-						</div>
-						<div>
-							<label for="editGrid">
-								<span>Edit Grid</span>
-							</label>
-							<input type="checkbox" id="editGrid" />
-						</div>
+<head>
+	<link rel="stylesheet" href="css/style.css" />
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Robot solvers</title>
+</head>
+
+<body>
+	<main>
+		<div id="noOfTests"></div>
+		<section id="menu">
+			<label id="closeMenu" for="closeMenuCheck" class="active">
+				<input type="checkbox" id="closeMenuCheck" />
+				<span></span>
+				<span></span>
+				<span></span>
+			</label>
+
+			<div id="menuItems" class="active">
+				<h2>Menu</h2>
+				<p>
+					<span class="info" data-topic="solver"></span>Solver:
+					<span class="success" id="currentSolver">AStar</span>
+				</p>
+				<section class="button-group">
+					<button id="AStarBtn">AStar</button>
+					<button id="BFSBtn">BFS</button>
+					<button id="DFSBtn">DFS</button>
+					<button id="UCSBtn">UCS</button>
+				</section>
+				<p>
+					<span class="info" data-topic="heuristic"></span>Heuristic:
+					<span class="success" id="currentDistanceMetric"></span>
+				</p>
+				<section class="button-group">
+					<button id="chebyshev" class="heuristic">Chebyshev</button>
+					<button id="euclidian" class="heuristic">Euclidian</button>
+					<button id="manhattan" class="heuristic">Manhattan</button>
+				</section>
+				<p>
+					<span class="info" data-topic="motion"></span>Motion model:
+					<span class="success" id="currentMotionModel"></span>
+				</p>
+				<section class="button-group">
+					<div class="join-buttons">
+						<button id="motion4n">4N</button>
+						<button id="edit4n">Edit</button>
+					</div>
+					<div class="join-buttons">
+						<button id="motion8n">8N</button>
+						<button id="edit8n">Edit</button>
+					</div>
+				</section>
+				<section id="editMotionModel"></section>
+				<section class="editing-options">
+					<p><span class="info" data-topic="options"></span>Options</p>
+					<div>
+						<label for="treeSearch">
+							<span>Tree Search</span>
+							<span class="warning">may crash browser</span>
+						</label>
+						<input type="checkbox" name="treeSearch" id="treeSearch" />
+					</div>
+					<div>
+						<label for="quickSolve">
+							<span>Quick solve</span>
+						</label>
+						<input type="checkbox" name="quickSolve" id="quickSolve" />
+						<label for="autoSolve">
+							<span>Auto Solve</span>
+						</label>
+						<input type="checkbox" name="autoSolve" id="autoSolve" />
+					</div>
+					<div>
+						<label for="moveTarget">
+							<span>Move Target</span>
+						</label>
+						<input type="checkbox" name="moveTarget" id="moveTarget" />
+						<label for="moveRobot">
+							<span>Move Robot</span>
+						</label>
+						<input type="checkbox" name="moveRobot" id="moveRobot" />
+					</div>
+					<div>
+						<label for="followMouse">
+							<span>Follow mouse</span>
+						</label>
+						<input type="checkbox" id="followMouse" />
+						<label for="runToTarget">
+							<span>Travelling Robot</span>
+						</label>
+						<input type="checkbox" id="runToTarget" />
+					</div>
+					<div>
+						<label for="editGrid">
+							<span>Edit Grid</span>
+						</label>
+						<input type="checkbox" id="editGrid" />
+					</div>
+				</section>
+				<section class="ranges">
+					<label for="hStrength">Heuristic weighting </label><span contenteditable="true"
+						id="hWeight">1.0</span>
+					<input type="range" min="0" max="5" step="0.01" value="1" name="hStrength" id="hStrength" />
+				</section>
+				<details>
+					<summary>
+						<span class="info" data-topic="robot"></span>Robot Settings
+					</summary>
+					<section class="ranges">
+						<label for="robotRadius">Robot Radius (m)</label>
+						<span contenteditable="true" id="rRadius"></span>
+						<input type="range" min="0.1" max="5.0" step="0.1" name="robotRadius" id="robotRadius" />
 					</section>
 					<section class="ranges">
-						<label for="hStrength">Heuristic weighting </label
-						><span contenteditable="true" id="hWeight">1.0</span>
-						<input
-							type="range"
-							min="0"
-							max="5"
-							step="0.01"
-							value="1"
-							name="hStrength"
-							id="hStrength"
-						/>
+						<label for="robotResolution">Robot Resolution </label>
+						<span contenteditable="true" id="rResolution"></span>
+						<input type="range" min="0.05" max="1.0" step="0.01" name="robotResolution"
+							id="robotResolution" />
 					</section>
-					<details>
-						<summary>
-							<span class="info" data-topic="robot"></span>Robot Settings
-						</summary>
-						<section class="ranges">
-							<label for="robotRadius">Robot Radius (m)</label>
-							<span contenteditable="true" id="rRadius"></span>
-							<input
-								type="range"
-								min="0.1"
-								max="5.0"
-								step="0.1"
-								name="robotRadius"
-								id="robotRadius"
-							/>
-						</section>
-						<section class="ranges">
-							<label for="robotResolution">Robot Resolution </label>
-							<span contenteditable="true" id="rResolution"></span>
-							<input
-								type="range"
-								min="0.05"
-								max="1.0"
-								step="0.01"
-								name="robotResolution"
-								id="robotResolution"
-							/>
-						</section>
-						<section class="ranges">
-							<label for="minTargetDistance">Target Distance</label>
-							<span contenteditable="true" id="rtDistance"></span>
-							<input
-								type="range"
-								min="0.05"
-								max="3.0"
-								step="0.05"
-								name="minTargetDistance"
-								id="minTargetDistance"
-							/>
-						</section>
-					</details>
-					<details>
-						<summary>
-							<span class="info" data-topic="scale"></span>Scaling
-						</summary>
-						<section class="ranges">
-							<label for="visualScale">Visual Scale </label>
-							<span contenteditable="true" id="vScale"></span>
-							<input
-								type="range"
-								min="1"
-								max="200"
-								step="1"
-								name="visualScale"
-								id="visualScale"
-							/>
-						</section>
-						<section class="ranges">
-							<label for="scanDotSize">Scan Dot Size </label>
-							<span contenteditable="true" id="sdSize"></span>
-							<input
-								type="range"
-								min="0.05"
-								max="0.5"
-								step="0.05"
-								name="scanDotSize"
-								id="scanDotSize"
-							/>
-						</section>
-						<section class="ranges">
-							<label for="neighbourDotSize">Neighbour Dot Size </label>
-							<span contenteditable="true" id="ndSize"></span>
-							<input
-								type="range"
-								min="0.05"
-								max="0.5"
-								step="0.05"
-								name="neighbourDotSize"
-								id="neighbourDotSize"
-							/>
-						</section>
-						<section class="ranges">
-							<label for="visitedDotSize">Visited Dot Size </label>
-							<span contenteditable="true" id="vdSize"></span>
-							<input
-								type="range"
-								min="0.05"
-								max="0.5"
-								step="0.05"
-								name="visitedDotSize"
-								id="visitedDotSize"
-							/>
-						</section>
-					</details>
-					<details class="show-item">
-						<summary>
-							<span class="info" data-topic="visuals"></span>Visuals
-						</summary>
-						<div>
-							<input
-								type="checkbox"
-								class="show"
-								name="showTooltips"
-								id="showTooltips"
-								checked
-							/>
-							<label for="showTooltips">
-								<span>Show Tooltips</span>
-							</label>
-						</div>
-						<div>
-							<input
-								type="checkbox"
-								class="show"
-								name="showBigGrid"
-								id="showBigGrid"
-								checked
-							/>
-							<label for="showBigGrid">
-								<span>Show Main Grid</span>
-							</label>
-						</div>
-						<div>
-							<input
-								type="checkbox"
-								class="show"
-								name="showBarrierOverlay"
-								id="showBarrierOverlay"
-							/>
-							<label for="showBarrierOverlay">
-								<span>Highlight Boundaries</span>
-							</label>
-						</div>
-						<div>
-							<input
-								type="checkbox"
-								class="show"
-								name="showRobotScan"
-								id="showRobotScan"
-								checked
-							/>
-							<label for="showRobotScan">
-								<span>Show Scan Dots</span>
-							</label>
-						</div>
-						<div>
-							<input
-								type="checkbox"
-								class="show"
-								name="showSolution"
-								id="showSolution"
-								checked
-							/>
-							<label for="showSolution">
-								<span>Show Solution</span>
-							</label>
-						</div>
-						<div>
-							<input
-								type="checkbox"
-								class="show"
-								name="showNeighbours"
-								id="showNeighbours"
-								checked
-							/>
-							<label for="showNeighbours">
-								<span>Show Neighbour Nodes</span>
-							</label>
-						</div>
-						<div>
-							<input
-								type="checkbox"
-								class="show"
-								name="showVisited"
-								id="showVisited"
-								checked
-							/>
-							<label for="showVisited">
-								<span>Show Visited Nodes</span>
-							</label>
-						</div>
-						<div>
-							<input
-								type="checkbox"
-								class="show"
-								name="showEdges"
-								id="showEdges"
-								checked
-							/>
-							<label for="showEdges">
-								<span>Show Edge Movements</span>
-							</label>
-						</div>
-						<div>
-							<input
-								type="checkbox"
-								class="show"
-								name="showFinalPath"
-								id="showFinalPath"
-								checked
-							/>
-							<label for="showFinalPath">
-								<span>Show Final Path</span>
-							</label>
-						</div>
-						<div>
-							<input
-								type="checkbox"
-								class="show"
-								name="showSolutionNodes"
-								id="showSolutionNodes"
-								checked
-							/>
-							<label for="showSolutionNodes">
-								<span>Show Path Nodes</span>
-							</label>
-						</div>
-					</details>
-					<details>
-						<summary>
-							<span class="info" data-topic="colours"></span>Colours
-						</summary>
-						<section id="modelColours"></section>
-					</details>
-					<p><span class="info" data-topic="defaults"></span>Load default</p>
-					<section class="button-group">
-						<button data-id="9" class="defaults">9x9</button>
-						<button data-id="12" class="defaults">12x12</button>
-						<button data-id="24" class="defaults">24x24</button>
-						<button data-id="48" class="defaults">48x48</button>
-					</section>
-					<p>
-						<span class="info" data-topic="customisation"></span>Custom Grid
-					</p>
 					<section class="ranges">
-						<label for="gridRowsCols">Number of Rows/Cols</label>
-						<input
-							type="range"
-							min="6"
-							max="100"
-							name="gridRowsCols"
-							id="gridRowsCols"
-						/>
+						<label for="minTargetDistance">Target Distance</label>
+						<span contenteditable="true" id="rtDistance"></span>
+						<input type="range" min="0.05" max="3.0" step="0.05" name="minTargetDistance"
+							id="minTargetDistance" />
 					</section>
-					<p><span class="info" data-topic="tests"></span>Tests</p>
-					<section class="button-group">
-						<button id="runTests" onclick="testRunner.testRun()">
-							Run Tests
-						</button>
-						<button id="showGraph" id="openGraph">Show Graph</button>
+				</details>
+				<details>
+					<summary>
+						<span class="info" data-topic="scale"></span>Scaling
+					</summary>
+					<section class="ranges">
+						<label for="visualScale">Visual Scale </label>
+						<span contenteditable="true" id="vScale"></span>
+						<input type="range" min="1" max="200" step="1" name="visualScale" id="visualScale" />
 					</section>
-				</div>
-			</section>
-			<div class="canvasSection">
-				<div id="animationSlider"></div>
-				<canvas id="canvas"></canvas>
+					<section class="ranges">
+						<label for="scanDotSize">Scan Dot Size </label>
+						<span contenteditable="true" id="sdSize"></span>
+						<input type="range" min="0.05" max="0.5" step="0.05" name="scanDotSize" id="scanDotSize" />
+					</section>
+					<section class="ranges">
+						<label for="neighbourDotSize">Neighbour Dot Size </label>
+						<span contenteditable="true" id="ndSize"></span>
+						<input type="range" min="0.05" max="0.5" step="0.05" name="neighbourDotSize"
+							id="neighbourDotSize" />
+					</section>
+					<section class="ranges">
+						<label for="visitedDotSize">Visited Dot Size </label>
+						<span contenteditable="true" id="vdSize"></span>
+						<input type="range" min="0.05" max="0.5" step="0.05" name="visitedDotSize"
+							id="visitedDotSize" />
+					</section>
+				</details>
+				<details class="show-item">
+					<summary>
+						<span class="info" data-topic="visuals"></span>Visuals
+					</summary>
+					<div>
+						<input type="checkbox" class="show" name="showTooltips" id="showTooltips" checked />
+						<label for="showTooltips">
+							<span>Show Tooltips</span>
+						</label>
+					</div>
+					<div>
+						<input type="checkbox" class="show" name="showBigGrid" id="showBigGrid" checked />
+						<label for="showBigGrid">
+							<span>Show Main Grid</span>
+						</label>
+					</div>
+					<div>
+						<input type="checkbox" class="show" name="showBarrierOverlay" id="showBarrierOverlay" />
+						<label for="showBarrierOverlay">
+							<span>Highlight Boundaries</span>
+						</label>
+					</div>
+					<div>
+						<input type="checkbox" class="show" name="showRobotScan" id="showRobotScan" checked />
+						<label for="showRobotScan">
+							<span>Show Scan Dots</span>
+						</label>
+					</div>
+					<div>
+						<input type="checkbox" class="show" name="showSolution" id="showSolution" checked />
+						<label for="showSolution">
+							<span>Show Solution</span>
+						</label>
+					</div>
+					<div>
+						<input type="checkbox" class="show" name="showNeighbours" id="showNeighbours" checked />
+						<label for="showNeighbours">
+							<span>Show Neighbour Nodes</span>
+						</label>
+					</div>
+					<div>
+						<input type="checkbox" class="show" name="showVisited" id="showVisited" checked />
+						<label for="showVisited">
+							<span>Show Visited Nodes</span>
+						</label>
+					</div>
+					<div>
+						<input type="checkbox" class="show" name="showEdges" id="showEdges" checked />
+						<label for="showEdges">
+							<span>Show Edge Movements</span>
+						</label>
+					</div>
+					<div>
+						<input type="checkbox" class="show" name="showFinalPath" id="showFinalPath" checked />
+						<label for="showFinalPath">
+							<span>Show Final Path</span>
+						</label>
+					</div>
+					<div>
+						<input type="checkbox" class="show" name="showSolutionNodes" id="showSolutionNodes" checked />
+						<label for="showSolutionNodes">
+							<span>Show Path Nodes</span>
+						</label>
+					</div>
+				</details>
+				<details>
+					<summary>
+						<span class="info" data-topic="colours"></span>Colours
+					</summary>
+					<section id="modelColours"></section>
+				</details>
+				<p><span class="info" data-topic="defaults"></span>Load default</p>
+				<section class="button-group">
+					<button data-id="9" class="defaults">9x9</button>
+					<button data-id="12" class="defaults">12x12</button>
+					<button data-id="24" class="defaults">24x24</button>
+					<button data-id="48" class="defaults">48x48</button>
+				</section>
+				<p>
+					<span class="info" data-topic="customisation"></span>Custom Grid
+				</p>
+				<section class="ranges">
+					<label for="gridRowsCols">Number of Rows/Cols</label>
+					<input type="range" min="6" max="100" name="gridRowsCols" id="gridRowsCols" />
+				</section>
+				<p><span class="info" data-topic="tests"></span>Tests</p>
+				<section class="button-group">
+					<button id="runTests" onclick="testRunner.testRun()">
+						Run Tests
+					</button>
+					<button id="showGraph" id="openGraph">Show Graph</button>
+				</section>
+
+				<p><span class="info" data-topic="tests"></span>Overlays</p>
+				<section class="button-group">
+					<label for="screenOverlay">Compare Solutions</label>
+					<button id="screenOverlays">Compare</button>
+
+				</section>
 			</div>
-			<div id="miniImage"></div>
-			<section id="solutionInformation"></section>
-		</main>
-		<section id="graphContainer">
-			<aside class="graphMenu">
-				<div class="header"><button id="closeGraph">X</button></div>
-				<div id="graphDataButtons" class="main"></div>
-			</aside>
-			<section id="graphSection"></section>
 		</section>
-		<div class="tooltip" style="top: -60px; left: -200px">
-			<h2></h2>
-			<section>
-				<p></p>
-			</section>
+		<div class="canvasSection">
+			<div id="animationSlider"></div>
+			<canvas id="canvas"></canvas>
 		</div>
-		<script src="https://hammerjs.github.io/dist/hammer.min.js"></script>
-		<script
-			lang="javascript"
-			src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"
-		></script>
-		<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-		<script
-			src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js"
-			integrity="sha512-wUYbRPLV5zs6IqvWd88HIqZU/b8TBx+I8LEioQ/UC0t5EMCLApqhIAnUg7EsAzdbhhdgW07TqYDdH3QEXRcPOQ=="
-			crossorigin="anonymous"
-			referrerpolicy="no-referrer"
-		></script>
-		<script src="lib/data/info.js"></script>
-		<script src="lib/Grapher.js"></script>
-		<script src="lib/SolutionInformation.js"></script>
-		<script src="lib/TestRunner.js"></script>
-		<script src="lib/colours.js"></script>
-		<script src="lib/functions.js"></script>
-		<script src="lib/Agent.js"></script>
-		<script src="lib/Target.js"></script>
-		<script src="lib/Node.js"></script>
-		<script src="lib/Listeners.js"></script>
-		<script src="lib/Grid.js"></script>
-		<script src="lib/Visualiser.js"></script>
-		<script src="lib/algorithms/AStar.js"></script>
-		<script src="lib/algorithms/UCS.js"></script>
-		<script src="lib/algorithms/BFS.js"></script>
-		<script src="lib/algorithms/DFS.js"></script>
-		<script src="app.js"></script>
-	</body>
+		<div id="miniImage"></div>
+		<section id="solutionInformation"></section>
+	</main>
+	<section id="graphContainer">
+		<aside class="graphMenu">
+			<div class="header"><button id="closeGraph">X</button></div>
+			<div id="graphDataButtons" class="main"></div>
+		</aside>
+		<section id="graphSection"></section>
+	</section>
+	<div class="tooltip" style="top: -60px; left: -200px">
+		<h2></h2>
+		<section>
+			<p></p>
+		</section>
+	</div>
+	<div id="overlay-container">
+		<div id="overlays"></div>
+		<div id="thumbnail-scroller">
+			<div id="thumbnails"></div>
+		</div>
+	</div>
+	<script src="https://hammerjs.github.io/dist/hammer.min.js"></script>
+	<script lang="javascript" src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.1/chartjs-plugin-zoom.min.js"
+		integrity="sha512-wUYbRPLV5zs6IqvWd88HIqZU/b8TBx+I8LEioQ/UC0t5EMCLApqhIAnUg7EsAzdbhhdgW07TqYDdH3QEXRcPOQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="lib/data/info.js"></script>
+	<script src="lib/Grapher.js"></script>
+	<script src="lib/SolutionInformation.js"></script>
+	<script src="lib/TestRunner.js"></script>
+	<script src="lib/colours.js"></script>
+	<script src="lib/functions.js"></script>
+	<script src="lib/Agent.js"></script>
+	<script src="lib/Target.js"></script>
+	<script src="lib/Node.js"></script>
+	<script src="lib/Listeners.js"></script>
+	<script src="lib/Grid.js"></script>
+	<script src="lib/Visualiser.js"></script>
+	<script src="lib/algorithms/AStar.js"></script>
+	<script src="lib/algorithms/UCS.js"></script>
+	<script src="lib/algorithms/BFS.js"></script>
+	<script src="lib/algorithms/DFS.js"></script>
+	<script src="app.js"></script>
+</body>
+
 </html>
