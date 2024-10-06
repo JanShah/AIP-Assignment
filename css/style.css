@@ -6,7 +6,7 @@ main {
 }
 
 .tooltip {
-	position: absolute;
+	position: fixed;
 	z-index: 2;
 	background: whitesmoke;
 	padding: 0 20px;
@@ -296,33 +296,45 @@ section#graphContainer.active {
 	color: red;
 }
 
+.hidden {
+	display: none;
+}
+
 div#overlay-container {
-    position: absolute;
-    overflow: hidden;
-    width: 640px;
-    top: 0;
-    right: 0;
-    height: 800px;
+	position: absolute;
+	width: 100%;
+	top: 21px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	/* margin-top: 2px; */
+	left: -1px;
 }
 
 #overlays {
     
     width: 640px;
     height: 640px;
-    filter: blur(0.2px) hue-rotate(297deg);
-    background-color: rgb(211 211 211);
+    filter: hue-rotate(297deg);
 }
 
 .overlay {
 	position: absolute;
-	top: 19px;
-	right: 20px;
-	mix-blend-mode: color-burn;
-	filter: hue-rotate(90deg) saturate(1) brightness(1.3);
+	/* top: 19px; */
+	/* right: 20px; */
+	mix-blend-mode: difference;
+	filter: hue-rotate(-260deg) saturate(1) brightness(2.3) contrast(1.5);
 }
 
 .overlay img {
-	max-width: 600px;
+	transition: all .5s ease;
+	opacity: 0.2;
+}
+
+.overlay img.highlight {
+    filter:contrast(300%) brightness(70%) blur(.1px);
+	opacity: 1;
+	box-shadow: #333 0px 0px 2px;
 }
 
 #overlay-container #thumbnails {
@@ -342,6 +354,10 @@ div#thumbnails img:hover {
 	scale: 1.02;
 	position: relative;
 }
+
+
+
+
 
 #thumbnail-scroller {
 	overflow-x: auto;
