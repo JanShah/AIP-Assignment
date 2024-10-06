@@ -297,7 +297,7 @@ section#graphContainer.active {
 }
 
 .hidden {
-	display: none;
+	display: none!important;
 }
 
 div#overlay-container {
